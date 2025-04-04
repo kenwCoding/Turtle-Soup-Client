@@ -1,0 +1,19 @@
+---
+description: styling guide
+globs: 
+---
+## Styling Priority
+
+1. **Design System Components** - Always use our design system components first when available
+2. **Tailwind Classes** - Use Tailwind utility classes when design system components don't cover your needs
+3. **Custom CSS Classes** - Create reusable CSS classes in appropriate stylesheets when Tailwind doesn't provide what you need
+4. **Inline Styles** - Use only as a last resort for truly one-off styling needs that can't be addressed by the above options
+
+## Best Practices
+
+- Avoid inline styles (`style={{}}`) whenever possible
+- Compose Tailwind classes to create consistent UI patterns
+- Extract commonly used Tailwind class combinations into component props or custom components
+- When extending design system components, use their built-in props for customization before adding Tailwind classes
+- Document any custom styling patterns that might be reused elsewhere
+

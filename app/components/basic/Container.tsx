@@ -1,6 +1,7 @@
 import React from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
 import classNames from 'classnames';
+import { cn } from "~/lib/utils";
 
 export type ContainerVariant = 'default' | 'fluid' | 'narrow' | 'wide' | 'full';
 export type ContainerPadding = 'none' | 'small' | 'medium' | 'large';
@@ -35,6 +36,9 @@ export interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
    * Additional CSS class names
    */
   className?: string;
+
+  fluid?: boolean;
+  size?: "default" | "narrow" | "wide";
 }
 
 /**
@@ -47,8 +51,20 @@ export const Container: React.FC<ContainerProps> = ({
   padding = 'medium',
   centered = true,
   className,
+  fluid = false,
+  size = "default",
   ...props
 }) => {
+  const baseStyles = fluid 
+    ? "w-full px-4 sm:px-6 lg:px-8" 
+    : "container mx-auto px-4 sm:px-6 lg:px-8";
+  
+  const sizeStyles = {
+    default: "",
+    narrow: "max-w-3xl",
+    wide: "max-w-7xl"
+  };
+
   const containerClasses = classNames(
     {
       // Base container class
@@ -72,7 +88,7 @@ export const Container: React.FC<ContainerProps> = ({
   );
 
   return (
-    <div className={containerClasses} {...props}>
+    <div className={cn(baseStyles, sizeStyles[size], containerClasses)} {...props}>
       {children}
     </div>
   );

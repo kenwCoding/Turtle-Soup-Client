@@ -30,7 +30,7 @@ const ColorSwatch: React.FC<{ color: string; name: string; hex: string }> = ({ c
       style={{ backgroundColor: color }} 
     />
     <div>
-      <Typography variant="subtitle1" className="font-bold">{name}</Typography>
+      <Typography variant="h6" className="font-bold">{name}</Typography>
       <Typography variant="caption" className="text-gray-600">{hex}</Typography>
     </div>
   </div>
@@ -314,7 +314,7 @@ const DesignSystemDemoPage: React.FC = () => {
           <div className="mt-4 border border-dashed border-gray-300 p-4">
             <div className="grid gap-4">
               <div className="bg-blue-100 p-4 rounded">
-                <Typography variant="subtitle1" className="font-semibold">4-Column Grid (Mobile)</Typography>
+                <Typography variant="h6" className="font-semibold">4-Column Grid (Mobile)</Typography>
                 <div className="grid grid-cols-4 gap-2 mt-2">
                   {Array.from({ length: 4 }).map((_, i) => (
                     <div key={i} className="bg-blue-200 h-10 flex items-center justify-center text-xs rounded">
@@ -325,7 +325,7 @@ const DesignSystemDemoPage: React.FC = () => {
               </div>
               
               <div className="bg-green-100 p-4 rounded hide-xs show-sm">
-                <Typography variant="subtitle1" className="font-semibold">8-Column Grid (Tablet)</Typography>
+                <Typography variant="h6" className="font-semibold">8-Column Grid (Tablet)</Typography>
                 <div className="grid grid-cols-8 gap-2 mt-2">
                   {Array.from({ length: 8 }).map((_, i) => (
                     <div key={i} className="bg-green-200 h-10 flex items-center justify-center text-xs rounded">
@@ -336,7 +336,7 @@ const DesignSystemDemoPage: React.FC = () => {
               </div>
               
               <div className="bg-purple-100 p-4 rounded hide-sm show-md">
-                <Typography variant="subtitle1" className="font-semibold">12-Column Grid (Desktop)</Typography>
+                <Typography variant="h6" className="font-semibold">12-Column Grid (Desktop)</Typography>
                 <div className="grid grid-cols-12 gap-2 mt-2">
                   {Array.from({ length: 12 }).map((_, i) => (
                     <div key={i} className="bg-purple-200 h-10 flex items-center justify-center text-xs rounded">
@@ -399,7 +399,7 @@ const DesignSystemDemoPage: React.FC = () => {
           <Typography variant="h3" className="font-semibold mt-6">Viewport Visibility Utilities</Typography>
           <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="border border-gray-300 p-4 rounded">
-              <Typography variant="subtitle1" className="font-semibold">Hide Classes</Typography>
+              <Typography variant="h6" className="font-semibold">Hide Classes</Typography>
               <Typography variant="body2" className="mt-2">
                 Use <code className="bg-gray-100 px-1 rounded">.hide-{'{breakpoint}'}</code> to hide elements at specific breakpoints.
               </Typography>
@@ -416,7 +416,7 @@ const DesignSystemDemoPage: React.FC = () => {
             </div>
             
             <div className="border border-gray-300 p-4 rounded">
-              <Typography variant="subtitle1" className="font-semibold">Show Classes</Typography>
+              <Typography variant="h6" className="font-semibold">Show Classes</Typography>
               <Typography variant="body2" className="mt-2">
                 Use <code className="bg-gray-100 px-1 rounded">.show-{'{breakpoint}'}</code> to show elements only at specific breakpoints.
               </Typography>
@@ -456,7 +456,7 @@ const DesignSystemDemoPage: React.FC = () => {
             <Typography variant="h3" className="font-semibold">Form Elements</Typography>
             <div className="flex flex-col gap-4 mt-2.5">
               <div>
-                <Typography variant="caption" component="label" className="block mb-1">Text Input</Typography>
+                <Typography variant="caption" className="block mb-1">Text Input</Typography>
                 <input 
                   type="text" 
                   placeholder="Enter text" 
@@ -464,7 +464,7 @@ const DesignSystemDemoPage: React.FC = () => {
                 />
               </div>
               <div>
-                <Typography variant="caption" component="label" className="block mb-1">Dropdown</Typography>
+                <Typography variant="caption" className="block mb-1">Dropdown</Typography>
                 <select className="w-full p-2 border border-gray-300 rounded bg-white">
                   <option>Option 1</option>
                   <option>Option 2</option>
@@ -473,7 +473,9 @@ const DesignSystemDemoPage: React.FC = () => {
               </div>
               <div className="flex items-center">
                 <input type="checkbox" id="checkbox" className="mr-2" />
-                <Typography variant="caption" component="label" htmlFor="checkbox">Checkbox</Typography>
+                <label htmlFor="checkbox">
+                  <Typography variant="caption">Checkbox</Typography>
+                </label>
               </div>
             </div>
           </div>
@@ -674,11 +676,11 @@ const DesignSystemDemoPage: React.FC = () => {
               <Typography variant="h4" className="m-0 mb-2.5 font-semibold">Error Message</Typography>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
-                  <Typography variant="subtitle2" className="text-red-600 font-bold">❌ Avoid</Typography>
+                  <Typography variant="h6" className="text-red-600 font-bold">❌ Avoid</Typography>
                   <Typography variant="body2">"Error 404: Page not found. The requested URL was not found on this server."</Typography>
                 </div>
                 <div>
-                  <Typography variant="subtitle2" className="text-green-600 font-bold">✅ Preferred</Typography>
+                  <Typography variant="h6" className="text-green-600 font-bold">✅ Preferred</Typography>
                   <Typography variant="body2">"We couldn't find that page. Check the URL or head back to the homepage to find what you're looking for."</Typography>
                 </div>
               </div>
@@ -688,11 +690,11 @@ const DesignSystemDemoPage: React.FC = () => {
               <Typography variant="h4" className="m-0 mb-2.5 font-semibold">Form Validation</Typography>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
-                  <Typography variant="subtitle2" className="text-red-600 font-bold">❌ Avoid</Typography>
+                  <Typography variant="h6" className="text-red-600 font-bold">❌ Avoid</Typography>
                   <Typography variant="body2">"Invalid input. Password requirements not met."</Typography>
                 </div>
                 <div>
-                  <Typography variant="subtitle2" className="text-green-600 font-bold">✅ Preferred</Typography>
+                  <Typography variant="h6" className="text-green-600 font-bold">✅ Preferred</Typography>
                   <Typography variant="body2">"Your password needs to be at least 8 characters and include a number and a special character."</Typography>
                 </div>
               </div>

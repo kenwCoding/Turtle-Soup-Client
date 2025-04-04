@@ -67,8 +67,8 @@ const BasicComponentsDemoPage: React.FC = () => {
         </div>
         
         <div className="demo-row">
-          <Typography variant="subtitle1">Subtitle 1</Typography>
-          <Typography variant="subtitle2">Subtitle 2</Typography>
+          <Typography variant="h6">Subtitle 1</Typography>
+          <Typography variant="body1" className="font-medium">Subtitle 2</Typography>
         </div>
         
         <div className="demo-row">
@@ -78,7 +78,7 @@ const BasicComponentsDemoPage: React.FC = () => {
         
         <div className="demo-row">
           <Typography variant="caption">Caption - Smaller text like captions</Typography>
-          <Typography variant="overline">Overline - Typically used for labels</Typography>
+          <Typography variant="body2" className="uppercase tracking-wider">OVERLINE - TYPICALLY USED FOR LABELS</Typography>
         </div>
         
         <h3>Typography Colors</h3>
@@ -93,8 +93,8 @@ const BasicComponentsDemoPage: React.FC = () => {
         
         <h3>Custom Component</h3>
         <div className="demo-row">
-          <Typography variant="h4" component="div" style={{ fontStyle: 'italic' }}>
-            This is an H4 styled as a div with italic style
+          <Typography variant="h4" style={{ fontStyle: 'italic' }}>
+            This is an H4 with italic style
           </Typography>
         </div>
       </section>

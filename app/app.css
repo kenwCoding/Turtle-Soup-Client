@@ -491,3 +491,8 @@
     max-width: calc(var(--container-2xl) * 1.1);
   }
 }
+
+/* Navbar styles */
+.dropdown-transition {
+  transition: all 0.2s ease-in-out;
+}

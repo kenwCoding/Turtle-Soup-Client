@@ -1,5 +1,5 @@
-import BasicComponentsDemoPage from "~/demo/basicComponent/BasicComponentsDemo";
+import BasicComponentsDemo from "~/demo/basicComponent/BasicComponentsDemo";
 
 export default function Home() {
-  return <BasicComponentsDemoPage />;
+  return <BasicComponentsDemo />;
 }
