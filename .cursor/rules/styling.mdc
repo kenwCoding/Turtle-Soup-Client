@@ -17,3 +17,116 @@ globs:
 - When extending design system components, use their built-in props for customization before adding Tailwind classes
 - Document any custom styling patterns that might be reused elsewhere
 
+# CSS Architecture Guidelines
+
+## Overview
+This document outlines the CSS architecture for our application, which follows a three-tier approach to styling:
+
+1. **Source Styling** - Explicit, hard-coded values that Tailwind doesn't cover
+2. **Theme Classes** - Design system abstractions using source styling and Tailwind
+3. **Component Implementation** - Direct application of styles in React components
+
+## CSS Structure in app.css
+
+```css
+/* Import Tailwind */
+@import "tailwindcss";
+
+/* Dark mode setup */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ========================================
+   1. SOURCE STYLING
+   ======================================== */
+
+/* 
+Source styling should:
+- Contain only hard-coded values Tailwind doesn't provide
+- Use descriptive, explicit names (not abstract concepts)
+- Never be used directly in components
+- Follow Tailwind naming conventions where possible
+*/
+
+.text-corporate-blue {
+  color: #0056b3;
+}
+
+.bg-purple-blue-gradient {
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+}
+
+/* ========================================
+   2. THEME CLASSES
+   ======================================== */
+
+/* 
+Theme classes should:
+- Represent design system concepts (primary, secondary, etc.)
+- Use @apply to combine source styling and Tailwind classes
+- Never contain hard-coded values directly
+- Not include component-specific concepts
+*/
+
+.text-primary {
+  @apply text-corporate-blue font-medium;
+}
+
+.bg-primary {
+  @apply bg-purple-blue-gradient text-white;
+}
+```
+
+
+## Adding New Styles Priority Hierarchy
+
+When adding new styles to the system, follow this priority order (highest to lowest):
+
+1. **Tailwind CSS default classes** - Use whenever possible
+2. **Source styling classes** - For hard-coded values Tailwind doesn't cover
+3. **Theme classes** - For design system concepts
+4. **Direct component styling** - Apply in React component TSX files
+
+## Implementation in Components Priority
+
+When implementing styles in components, follow this priority order (highest to lowest):
+
+1. **Theme classes** - Prefer these for consistent design system application
+2. **Tailwind CSS default classes** - Use for layout and standard styling needs
+3. **Source styling classes** - Should rarely be used directly in components
+
+## Implementation Guidelines
+
+### Source Styling
+- Name classes descriptively based on their visual properties
+- Avoid abstract terms like "primary", "brand", or "custom"
+- Example: `.text-corporate-blue` instead of `.text-brand`
+
+### Theme Classes
+- Represent design system concepts like "primary", "secondary"
+- Only combine existing Tailwind and source styling classes
+- Example: `.bg-primary { @apply bg-purple-blue-gradient text-white; }`
+
+### Component Implementation
+- Prioritize theme classes for consistent design language
+- Apply styling directly in React components using className props
+- Combine theme classes with Tailwind classes as needed
+- No component-specific classes should exist in app.css
+
+## Example Component Implementation
+
+```tsx
+const Button = ({ variant = 'primary', children }) => {
+  return (
+    <button 
+      className={`
+        rounded-md py-2 px-4 font-medium
+        ${variant === 'primary' ? 'bg-primary' : 'bg-secondary text-primary'}
+      `}
+    >
+      {children}
+    </button>
+  );
+};
+```
+
+This architecture ensures a clean separation of concerns while maintaining flexibility and consistency across the application.

@@ -1,498 +1,76 @@
 /* Import Tailwind CSS */
 @import "tailwindcss";
 
-@theme {
-  /* Custom color palette */
-  --color-primary-50: oklch(0.971 0.013 250.0);
-  --color-primary-100: oklch(0.936 0.032 250.0);
-  --color-primary-200: oklch(0.885 0.062 250.0);
-  --color-primary-300: oklch(0.808 0.114 250.0);
-  --color-primary-400: oklch(0.704 0.191 250.0);
-  --color-primary-500: oklch(0.637 0.237 250.0);
-  --color-primary-600: oklch(0.577 0.245 250.0);
-  --color-primary-700: oklch(0.505 0.213 250.0);
-  --color-primary-800: oklch(0.444 0.177 250.0);
-  --color-primary-900: oklch(0.396 0.141 250.0);
-  --color-primary-950: oklch(0.258 0.092 250.0);
-  
-  --color-secondary-50: oklch(0.971 0.013 190.0);
-  --color-secondary-100: oklch(0.936 0.032 190.0);
-  --color-secondary-200: oklch(0.885 0.062 190.0);
-  --color-secondary-300: oklch(0.808 0.114 190.0);
-  --color-secondary-400: oklch(0.704 0.191 190.0);
-  --color-secondary-500: oklch(0.637 0.237 190.0);
-  --color-secondary-600: oklch(0.577 0.245 190.0);
-  --color-secondary-700: oklch(0.505 0.213 190.0);
-  --color-secondary-800: oklch(0.444 0.177 190.0);
-  --color-secondary-900: oklch(0.396 0.141 190.0);
-  --color-secondary-950: oklch(0.258 0.092 190.0);
-  
-  --color-accent-50: oklch(0.971 0.013 130.0);
-  --color-accent-100: oklch(0.936 0.032 130.0);
-  --color-accent-200: oklch(0.885 0.062 130.0);
-  --color-accent-300: oklch(0.808 0.114 130.0);
-  --color-accent-400: oklch(0.704 0.191 130.0);
-  --color-accent-500: oklch(0.637 0.237 130.0);
-  --color-accent-600: oklch(0.577 0.245 130.0);
-  --color-accent-700: oklch(0.505 0.213 130.0);
-  --color-accent-800: oklch(0.444 0.177 130.0);
-  --color-accent-900: oklch(0.396 0.141 130.0);
-  --color-accent-950: oklch(0.258 0.092 130.0);
-  
-  /* Custom fonts */
-  --font-heading: 'Montserrat', var(--font-sans);
-  --font-body: 'Open Sans', var(--font-sans);
-  
-  /* Custom spacing scale */
-  --spacing: 0.25rem;
-  
-  /* Custom breakpoints */
-  --breakpoint-xs: 30rem;  /* 480px */
-  --breakpoint-sm: 40rem;  /* 640px */
-  --breakpoint-md: 48rem;  /* 768px */
-  --breakpoint-lg: 64rem;  /* 1024px */
-  --breakpoint-xl: 80rem;  /* 1280px */
-  --breakpoint-2xl: 96rem; /* 1536px */
-  
-  /* Custom container sizes */
-  --container-sm: 30rem;   /* 480px */
-  --container-md: 45rem;   /* 720px */
-  --container-lg: 60rem;   /* 960px */
-  --container-xl: 70rem;   /* 1120px */
-  --container-2xl: 80rem;  /* 1280px */
-  
-  /* Custom border radius */
-  --radius-sm: 0.125rem;
-  --radius-md: 0.25rem;
-  --radius-lg: 0.5rem;
-  --radius-xl: 1rem;
-  --radius-2xl: 2rem;
-  --radius-full: 9999px;
-  
-  /* Custom shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  
-  /* Custom animations */
-  --animate-fade-in: fade-in 0.3s ease-out;
-  --animate-slide-in: slide-in 0.4s ease-out;
-  
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+/* Enable class-based dark mode */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ========================================
+   1. SOURCE STYLING
+   ======================================== */
+
+/* 
+Source styling should:
+- Contain only hard-coded values Tailwind doesn't provide
+- Use descriptive, explicit names (not abstract concepts)
+- Never be used directly in components
+- Follow Tailwind naming conventions where possible
+*/
+
+/* Font families */
+@layer theme {
+  .font-inter {
+    font-family: 'Inter', system-ui, sans-serif;
   }
   
-  @keyframes slide-in {
-    from {
-      transform: translateY(10px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-}
-
-/* Custom component classes */
-@layer components {
-  .btn {
-    @apply px-4 py-2 rounded-md font-medium transition-colors cursor-pointer;
+  .font-montserrat {
+    font-family: 'Montserrat', system-ui, sans-serif;
   }
   
-  .btn-primary {
-    @apply bg-primary-600 text-white hover:bg-primary-700;
+  .bg-slate-gradient {
+    background: linear-gradient(135deg, #e0e7ff 0%, #cbd5e1 100%);
   }
   
-  .btn-secondary {
-    @apply bg-secondary-600 text-white hover:bg-secondary-700;
+  .bg-blue-gradient {
+    background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
   }
   
-  .card {
-    @apply bg-white rounded-lg shadow-md p-4;
+  .bg-purple-gradient {
+    background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
   }
   
-  .heading-1 {
-    @apply text-4xl font-heading font-bold;
+  .bg-green-gradient {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   }
   
-  .heading-2 {
-    @apply text-3xl font-heading font-bold;
+  .bg-orange-gradient {
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
   }
   
-  .heading-3 {
-    @apply text-2xl font-heading font-semibold;
+  .bg-red-gradient {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   }
   
-  /* Add cursor pointer to interactive elements */
-  button, 
-  select,
-  input[type="checkbox"],
-  input[type="radio"],
-  .card button,
-  .interactive-icon {
-    @apply cursor-pointer;
-  }
-}
-
-/* Viewport Utilities for Mobile-First Design */
-.hide-xs {
-  display: none;
-}
-
-.show-xs {
-  display: block;
-}
-
-@media (min-width: var(--breakpoint-xs)) {
-  .hide-xs {
-    display: block;
+  .shadow-soft {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
   
-  .show-xs {
-    display: none;
+  .shadow-medium {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   }
   
-  .hide-sm {
-    display: none;
-  }
-  
-  .show-sm {
-    display: block;
+  .shadow-hard {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
 }
 
-@media (min-width: var(--breakpoint-sm)) {
-  .hide-sm {
-    display: block;
-  }
-  
-  .show-sm {
-    display: none;
-  }
-  
-  .hide-md {
-    display: none;
-  }
-  
-  .show-md {
-    display: block;
-  }
+/* Apply base font to html element */
+html {
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
-@media (min-width: var(--breakpoint-md)) {
-  .hide-md {
-    display: block;
-  }
-  
-  .show-md {
-    display: none;
-  }
-  
-  .hide-lg {
-    display: none;
-  }
-  
-  .show-lg {
-    display: block;
-  }
-}
-
-@media (min-width: var(--breakpoint-lg)) {
-  .hide-lg {
-    display: block;
-  }
-  
-  .show-lg {
-    display: none;
-  }
-  
-  .hide-xl {
-    display: none;
-  }
-  
-  .show-xl {
-    display: block;
-  }
-}
-
-@media (min-width: var(--breakpoint-xl)) {
-  .hide-xl {
-    display: block;
-  }
-  
-  .show-xl {
-    display: none;
-  }
-  
-  .hide-2xl {
-    display: none;
-  }
-  
-  .show-2xl {
-    display: block;
-  }
-}
-
-@media (min-width: var(--breakpoint-2xl)) {
-  .hide-2xl {
-    display: block;
-  }
-  
-  .show-2xl {
-    display: none;
-  }
-}
-
-/* Responsive Container Classes */
-.container {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-@media (min-width: var(--breakpoint-sm)) {
-  .container {
-    max-width: var(--container-sm);
-  }
-}
-
-@media (min-width: var(--breakpoint-md)) {
-  .container {
-    max-width: var(--container-md);
-  }
-}
-
-@media (min-width: var(--breakpoint-lg)) {
-  .container {
-    max-width: var(--container-lg);
-  }
-}
-
-@media (min-width: var(--breakpoint-xl)) {
-  .container {
-    max-width: var(--container-xl);
-  }
-}
-
-@media (min-width: var(--breakpoint-2xl)) {
-  .container {
-    max-width: var(--container-2xl);
-  }
-}
-
-/* Responsive Grid System */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-}
-
-@media (min-width: var(--breakpoint-sm)) {
-  .grid {
-    grid-template-columns: repeat(8, 1fr);
-  }
-}
-
-@media (min-width: var(--breakpoint-md)) {
-  .grid {
-    grid-template-columns: repeat(12, 1fr);
-  }
-}
-
-/* Typography Component */
-.typography {
-  margin: 0;
-  padding: 0;
-}
-
-/* Typography Variants */
-.typography-h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.01562em;
-}
-
-.typography-h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.00833em;
-}
-
-.typography-h3 {
-  font-size: 1.75rem;
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: 0em;
-}
-
-.typography-h4 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: 0.00735em;
-}
-
-.typography-h5 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: 0em;
-}
-
-.typography-h6 {
-  font-size: 1.125rem;
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: 0.0075em;
-}
-
-.typography-subtitle1 {
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.5;
-  letter-spacing: 0.00938em;
-}
-
-.typography-subtitle2 {
-  font-size: 0.875rem;
-  font-weight: 500;
-  line-height: 1.5;
-  letter-spacing: 0.00714em;
-}
-
-.typography-body1 {
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0.00938em;
-}
-
-.typography-body2 {
-  font-size: 0.875rem;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0.01071em;
-}
-
-.typography-caption {
-  font-size: 0.75rem;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0.03333em;
-}
-
-.typography-overline {
-  font-size: 0.75rem;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0.08333em;
-  text-transform: uppercase;
-}
-
-/* Typography Colors */
-.typography-color-primary {
-  color: var(--color-primary);
-}
-
-.typography-color-secondary {
-  color: var(--color-secondary);
-}
-
-.typography-color-error {
-  color: var(--color-error);
-}
-
-.typography-color-warning {
-  color: var(--color-warning);
-}
-
-.typography-color-info {
-  color: var(--color-info);
-}
-
-.typography-color-success {
-  color: var(--color-success);
-}
-
-.typography-color-inherit {
-  color: inherit;
-}
-
-/* Container Variants */
-.container-narrow {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.container-wide {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@media (min-width: var(--breakpoint-sm)) {
-  .container-narrow {
-    max-width: calc(var(--container-sm) * 0.8);
-  }
-  
-  .container-wide {
-    max-width: calc(var(--container-sm) * 1.1);
-  }
-}
-
-@media (min-width: var(--breakpoint-md)) {
-  .container-narrow {
-    max-width: calc(var(--container-md) * 0.8);
-  }
-  
-  .container-wide {
-    max-width: calc(var(--container-md) * 1.1);
-  }
-}
-
-@media (min-width: var(--breakpoint-lg)) {
-  .container-narrow {
-    max-width: calc(var(--container-lg) * 0.8);
-  }
-  
-  .container-wide {
-    max-width: calc(var(--container-lg) * 1.1);
-  }
-}
-
-@media (min-width: var(--breakpoint-xl)) {
-  .container-narrow {
-    max-width: calc(var(--container-xl) * 0.8);
-  }
-  
-  .container-wide {
-    max-width: calc(var(--container-xl) * 1.1);
-  }
-}
-
-@media (min-width: var(--breakpoint-2xl)) {
-  .container-narrow {
-    max-width: calc(var(--container-2xl) * 0.8);
-  }
-  
-  .container-wide {
-    max-width: calc(var(--container-2xl) * 1.1);
-  }
-}
-
-/* Navbar styles */
-.dropdown-transition {
-  transition: all 0.2s ease-in-out;
+button {
+  cursor: pointer;
 }

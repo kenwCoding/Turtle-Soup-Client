@@ -2,6 +2,7 @@ import React from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
 import classNames from 'classnames';
 import { cn } from "~/lib/utils";
+import { layout } from '~/styling';
 
 export type ContainerVariant = 'default' | 'fluid' | 'narrow' | 'wide' | 'full';
 export type ContainerPadding = 'none' | 'small' | 'medium' | 'large';
@@ -47,7 +48,7 @@ export interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
  */
 export const Container: React.FC<ContainerProps> = ({
   children,
-  variant = 'default',
+  variant = 'fluid',
   padding = 'medium',
   centered = true,
   className,
@@ -55,16 +56,22 @@ export const Container: React.FC<ContainerProps> = ({
   size = "default",
   ...props
 }) => {
-  const baseStyles = fluid 
-    ? "w-full px-4 sm:px-6 lg:px-8" 
-    : "container mx-auto px-4 sm:px-6 lg:px-8";
+  // Map variant to the appropriate class from our styling system
+  let containerClass = '';
   
-  const sizeStyles = {
-    default: "",
-    narrow: "max-w-3xl",
-    wide: "max-w-7xl"
-  };
-
+  if (variant === 'fluid' || fluid) {
+    containerClass = layout.containerFluid;
+  } else if (variant === 'narrow' || size === 'narrow') {
+    containerClass = layout.containerNarrow;
+  } else if (variant === 'wide' || size === 'wide') {
+    containerClass = layout.containerWide;
+  } else if (variant === 'default') {
+    containerClass = layout.containerFluid;
+  }
+  
+  // Handle the 'full' variant which doesn't use horizontal padding
+  const paddingClass = variant === 'full' ? '' : getPaddingClass(padding);
+  
   const containerClasses = classNames(
     {
       // Base container class
@@ -72,26 +79,41 @@ export const Container: React.FC<ContainerProps> = ({
       
       // Variant classes
       'w-full': variant === 'fluid' || variant === 'full',
-      'container-narrow': variant === 'narrow',
-      'container-wide': variant === 'wide',
-      
-      // Padding classes
-      'px-0': padding === 'none',
-      'px-2': padding === 'small',
-      'px-4': padding === 'medium',
-      'px-6': padding === 'large',
       
       // Centering
       'mx-auto': centered,
     },
+    paddingClass,
     className
   );
 
   return (
-    <div className={cn(baseStyles, sizeStyles[size], containerClasses)} {...props}>
+    <div 
+      className={cn(
+        containerClass,
+        containerClasses
+      )} 
+      {...props}
+    >
       {children}
     </div>
   );
 };
+
+// Helper function to get padding class based on padding prop
+function getPaddingClass(padding: ContainerPadding): string {
+  switch (padding) {
+    case 'none':
+      return 'px-0';
+    case 'small':
+      return 'px-2';
+    case 'medium':
+      return 'px-4 sm:px-6';
+    case 'large':
+      return 'px-6 sm:px-8';
+    default:
+      return 'px-4 sm:px-6';
+  }
+}
 
 export default Container; 
