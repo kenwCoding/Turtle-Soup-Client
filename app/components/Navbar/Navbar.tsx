@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import { backgrounds, textColors, typography, shadows, borders } from '~/styling';
+import Button from '~/components/basic/Button';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -34,6 +35,19 @@ export default function Navbar() {
     }
   };
   
+  // Icons for dark/light mode
+  const sunIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+      <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+    </svg>
+  );
+  
+  const moonIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+      <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+    </svg>
+  );
+  
   return (
     <nav className={`${backgrounds.surface} border-b ${borders.surface} ${shadows.elevation1} sticky top-0 z-50`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,24 +75,17 @@ export default function Navbar() {
           {/* Dark mode toggle and mobile menu button */}
           <div className="flex items-center">
             {/* Dark mode toggle */}
-            <button
-              type="button"
+            <Button
+              variant="ghost"
+              size="sm"
+              icon={isDarkMode ? sunIcon : moonIcon}
               onClick={toggleDarkMode}
-              className={`mr-4 p-2 rounded-full ${textColors.onSurfaceMuted} hover:${textColors.primary} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors`}
               aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+              className="mr-4 rounded-full"
+              showFocusRing={false}
             >
-              {isDarkMode ? (
-                // Sun icon for light mode
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
-                </svg>
-              ) : (
-                // Moon icon for dark mode
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                </svg>
-              )}
-            </button>
+              {''}
+            </Button>
             
             {/* Mobile menu button */}
             <div className="md:hidden">
@@ -129,23 +136,20 @@ export default function Navbar() {
           <MobileNavLink to="/basicComponents">Components</MobileNavLink>
           
           {/* Dark mode toggle in mobile menu */}
-          <button
-            onClick={toggleDarkMode}
-            className={`flex w-full items-center pl-3 pr-4 py-2 ${typography.body1} ${textColors.onSurface} hover:${backgrounds.surfaceAlt} hover:${textColors.primary} transition-colors duration-200`}
-          >
-            <span className="mr-3">
-              {isDarkMode ? (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
-                </svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                </svg>
-              )}
-            </span>
-            {isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-          </button>
+          <div className="pl-3 pr-4 py-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              icon={isDarkMode ? sunIcon : moonIcon}
+              iconPosition="left"
+              onClick={toggleDarkMode}
+              width="full"
+              className={`${typography.body1} justify-start rounded-full`}
+              showFocusRing={false}
+            >
+              {isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            </Button>
+          </div>
         </div>
       </div>
     </nav>

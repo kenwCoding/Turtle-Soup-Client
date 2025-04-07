@@ -14,6 +14,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: ReactNode;
   iconPosition?: 'left' | 'right';
   className?: string;
+  showOutline?: boolean;
+  showFocusRing?: boolean;
 }
 
 /**
@@ -45,6 +47,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
  * @param disabled - Whether the button is disabled
  * @param icon - Optional icon to display
  * @param iconPosition - Position of the icon ('left' or 'right')
+ * @param showOutline - Whether to show border outline (only applies to outline variant)
+ * @param showFocusRing - Whether to show focus ring when button is focused
  */
 export function Button({ 
   children, 
@@ -56,10 +60,12 @@ export function Button({
   icon,
   iconPosition = 'left',
   className = '',
+  showOutline = true,
+  showFocusRing = true,
   ...props
 }: ButtonProps) {
   // Base classes that all buttons share
-  const baseClasses = 'flex justify-center items-center rounded font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-opacity-50';
+  const baseClasses = `flex justify-center items-center rounded font-medium transition-all duration-200 ${showFocusRing ? 'focus:outline-none focus:ring-2 focus:ring-opacity-50' : 'focus:outline-none'}`;
   
   // Size classes
   const sizeClasses = {
@@ -77,16 +83,21 @@ export function Button({
     fixed: 'flex w-60'
   };
   
+  // Determine outline classes based on showOutline prop
+  const outlineVariantClass = showOutline 
+    ? `bg-transparent border ${borders.primary} ${textColors.primary} hover:bg-opacity-10 hover:bg-slate-500` 
+    : `bg-transparent ${textColors.primary} hover:bg-opacity-10 hover:bg-slate-500`;
+
   // Variant-specific classes
   const variantClasses = {
-    primary: `${backgrounds.primary} ${textColors.onPrimary} hover:opacity-90 focus:${borders.focus}`,
-    secondary: `${backgrounds.secondary} ${textColors.onSecondary} hover:opacity-90 focus:${borders.focus}`,
-    accent: `${backgrounds.accent} ${textColors.onAccent} hover:opacity-90 focus:${borders.focus}`,
-    success: `${backgrounds.success} ${textColors.onSuccess} hover:opacity-90 focus:${borders.focus}`,
-    warning: `${backgrounds.warning} ${textColors.onWarning} hover:opacity-90 focus:${borders.focus}`,
-    danger: `${backgrounds.danger} ${textColors.onDanger} hover:opacity-90 focus:${borders.focus}`,
-    outline: `bg-transparent border ${borders.primary} ${textColors.primary} hover:bg-opacity-10 hover:bg-slate-500 focus:${borders.focus}`,
-    ghost: `bg-transparent ${textColors.primary} hover:bg-slate-100 dark:hover:bg-slate-800 focus:${borders.focus}`
+    primary: `${backgrounds.primary} ${textColors.onPrimary} hover:opacity-90 ${showFocusRing ? `focus:${borders.focus}` : ''}`,
+    secondary: `${backgrounds.secondary} ${textColors.onSecondary} hover:opacity-90 ${showFocusRing ? `focus:${borders.focus}` : ''}`,
+    accent: `${backgrounds.accent} ${textColors.onAccent} hover:opacity-90 ${showFocusRing ? `focus:${borders.focus}` : ''}`,
+    success: `${backgrounds.success} ${textColors.onSuccess} hover:opacity-90 ${showFocusRing ? `focus:${borders.focus}` : ''}`,
+    warning: `${backgrounds.warning} ${textColors.onWarning} hover:opacity-90 ${showFocusRing ? `focus:${borders.focus}` : ''}`,
+    danger: `${backgrounds.danger} ${textColors.onDanger} hover:opacity-90 ${showFocusRing ? `focus:${borders.focus}` : ''}`,
+    outline: outlineVariantClass + (showFocusRing ? ` focus:${borders.focus}` : ''),
+    ghost: `bg-transparent ${textColors.primary} hover:bg-slate-100 dark:hover:bg-slate-800 ${showFocusRing ? `focus:${borders.focus}` : ''}`
   };
   
   // Disabled state overrides variant styling
@@ -107,21 +118,26 @@ export function Button({
 
   // Determine content based on loading state
   const buttonContent = (
-    <>
+    <span className='flex justify-between items-center gap-2'>
       {loading && (
         <svg className="animate-spin -ml-1 mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
       )}
-      {icon && iconPosition === 'left' && !loading && (
-        <span className="mr-2">{icon}</span>
-      )}
-      <span>{children}</span>
-      {icon && iconPosition === 'right' && (
-        <span className="ml-2">{icon}</span>
-      )}
-    </>
+      {icon && iconPosition === 'left' && !loading
+        ? <span className="flex justify-between items-center">{icon}</span>
+        : null
+      }
+      {children
+        ? <span>{children}</span>
+        : null
+      }
+      {icon && iconPosition === 'right'
+        ? <span className="flex justify-between items-center">{icon}</span>
+        : null
+      }
+    </span>
   );
   
   return (
