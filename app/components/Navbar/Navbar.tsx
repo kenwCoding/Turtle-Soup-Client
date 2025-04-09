@@ -3,6 +3,33 @@ import { Link } from 'react-router';
 import { backgrounds, textColors, typography, shadows, borders } from '~/styling';
 import Button from '~/components/basic/Button';
 
+const routes = [
+  {
+    name: "Home",
+    path: "/",
+  },
+  {
+    name: "Play Game",
+    path: "/play",
+  },
+  {
+    name: "How to Play",
+    path: "/how-to-play",
+  },
+  // {
+  //   name: "Design System",
+  //   path: "/designSystem",
+  // },
+  // {
+  //   name: "Components",
+  //   path: "/basicComponents",
+  // },
+  // {
+  //   name: "Responsive Typography",
+  //   path: "/responsiveTypography",
+  // },
+]
+
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -56,19 +83,15 @@ export default function Navbar() {
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
               <Link to="/" className={`${typography.heading3} ${textColors.brand} hover:opacity-80 transition-opacity`}>
-                🐢 Turtle Soup
+                Turtle Soup
               </Link>
             </div>
             
             {/* Desktop navigation */}
             <div className="hidden md:ml-6 md:flex md:space-x-8">
-              <NavLink to="/">Home</NavLink>
-              <NavLink to="/play">Play Game</NavLink>
-              <NavLink to="/how-to-play">How to Play</NavLink>
-              <NavLink to="/about">About</NavLink>
-              {/* Keep design system links if needed */}
-              <NavLink to="/designSystem">Design System</NavLink>
-              <NavLink to="/basicComponents">Components</NavLink>
+              {routes.map((route) => (
+                <NavLink key={route.path} to={route.path}>{route.name}</NavLink>
+              ))}
             </div>
           </div>
           
@@ -128,13 +151,9 @@ export default function Navbar() {
       {/* Mobile menu, show/hide based on menu state */}
       <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden`} id="mobile-menu">
         <div className="pt-2 pb-3 space-y-1">
-          <MobileNavLink to="/">Home</MobileNavLink>
-          <MobileNavLink to="/play">Play Game</MobileNavLink>
-          <MobileNavLink to="/how-to-play">How to Play</MobileNavLink>
-          <MobileNavLink to="/about">About</MobileNavLink>
-          <MobileNavLink to="/designSystem">Design System</MobileNavLink>
-          <MobileNavLink to="/basicComponents">Components</MobileNavLink>
-          
+          {routes.map((route) => (
+            <MobileNavLink key={route.path} to={route.path}>{route.name}</MobileNavLink>
+          ))}
           {/* Dark mode toggle in mobile menu */}
           <div className="pl-3 pr-4 py-2">
             <Button

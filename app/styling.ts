@@ -9,22 +9,84 @@
 export const typography = {
   // Headings
   heading1: "text-4xl font-bold tracking-tight font-montserrat",
+  "sm:heading1": "sm:text-4xl sm:font-bold sm:tracking-tight sm:font-montserrat",
+  "md:heading1": "md:text-4xl md:font-bold md:tracking-tight md:font-montserrat",
+  "lg:heading1": "lg:text-4xl lg:font-bold lg:tracking-tight lg:font-montserrat",
+  "xl:heading1": "xl:text-4xl xl:font-bold xl:tracking-tight xl:font-montserrat",
+  "2xl:heading1": "2xl:text-4xl 2xl:font-bold 2xl:tracking-tight 2xl:font-montserrat",
+
   heading2: "text-3xl font-bold tracking-tight font-montserrat",
+  "sm:heading2": "sm:text-3xl sm:font-bold sm:tracking-tight sm:font-montserrat",
+  "md:heading2": "md:text-3xl md:font-bold md:tracking-tight md:font-montserrat",
+  "lg:heading2": "lg:text-3xl lg:font-bold lg:tracking-tight lg:font-montserrat",
+  "xl:heading2": "xl:text-3xl xl:font-bold xl:tracking-tight xl:font-montserrat",
+  "2xl:heading2": "2xl:text-3xl 2xl:font-bold 2xl:tracking-tight 2xl:font-montserrat",
+
   heading3: "text-2xl font-bold font-montserrat",
+  "sm:heading3": "sm:text-2xl sm:font-bold sm:font-montserrat",
+  "md:heading3": "md:text-2xl md:font-bold md:font-montserrat",
+  "lg:heading3": "lg:text-2xl lg:font-bold lg:font-montserrat",
+  "xl:heading3": "xl:text-2xl xl:font-bold xl:font-montserrat",
+  "2xl:heading3": "2xl:text-2xl 2xl:font-bold 2xl:font-montserrat",
+
   heading4: "text-xl font-semibold font-montserrat",
+  "sm:heading4": "sm:text-xl sm:font-semibold sm:font-montserrat",
+  "md:heading4": "md:text-xl md:font-semibold md:font-montserrat",
+  "lg:heading4": "lg:text-xl lg:font-semibold lg:font-montserrat",
+  "xl:heading4": "xl:text-xl xl:font-semibold xl:font-montserrat",
+  "2xl:heading4": "2xl:text-xl 2xl:font-semibold 2xl:font-montserrat",
+
   heading5: "text-lg font-semibold font-montserrat",
+  "sm:heading5": "sm:text-lg sm:font-semibold sm:font-montserrat",
+  "md:heading5": "md:text-lg md:font-semibold md:font-montserrat",
+  "lg:heading5": "lg:text-lg lg:font-semibold lg:font-montserrat",
+  "xl:heading5": "xl:text-lg xl:font-semibold xl:font-montserrat",
+  "2xl:heading5": "2xl:text-lg 2xl:font-semibold 2xl:font-montserrat",
   
   // Body text
   body1: "text-base font-normal font-inter",
+  "sm:body1": "sm:text-base sm:font-normal sm:font-inter",
+  "md:body1": "md:text-base md:font-normal md:font-inter",
+  "lg:body1": "lg:text-base lg:font-normal lg:font-inter",
+  "xl:body1": "xl:text-base xl:font-normal xl:font-inter",
+  "2xl:body1": "2xl:text-base 2xl:font-normal 2xl:font-inter",
+
   body2: "text-sm font-normal font-inter",
+  "sm:body2": "sm:text-sm sm:font-normal sm:font-inter",
+  "md:body2": "md:text-sm md:font-normal md:font-inter",
+  "lg:body2": "lg:text-sm lg:font-normal lg:font-inter",
+  "xl:body2": "xl:text-sm xl:font-normal xl:font-inter",
+  "2xl:body2": "2xl:text-sm 2xl:font-normal 2xl:font-inter",
+
   body3: "text-xs font-normal font-inter",
+  "sm:body3": "sm:text-xs sm:font-normal sm:font-inter",
+  "md:body3": "md:text-xs md:font-normal md:font-inter",
+  "lg:body3": "lg:text-xs lg:font-normal lg:font-inter",
+  "xl:body3": "xl:text-xs xl:font-normal xl:font-inter",
+  "2xl:body3": "2xl:text-xs 2xl:font-normal 2xl:font-inter",
   
   // Labels
   label1: "text-sm font-medium uppercase tracking-wider font-montserrat",
+  "sm:label1": "sm:text-sm sm:font-medium sm:uppercase sm:tracking-wider sm:font-montserrat",
+  "md:label1": "md:text-sm md:font-medium md:uppercase md:tracking-wider md:font-montserrat",
+  "lg:label1": "lg:text-sm lg:font-medium lg:uppercase lg:tracking-wider lg:font-montserrat",
+  "xl:label1": "xl:text-sm xl:font-medium xl:uppercase xl:tracking-wider xl:font-montserrat",
+  "2xl:label1": "2xl:text-sm 2xl:font-medium 2xl:uppercase 2xl:tracking-wider 2xl:font-montserrat",
+
   label2: "text-xs font-medium uppercase tracking-wider font-montserrat",
+  "sm:label2": "sm:text-xs sm:font-medium sm:uppercase sm:tracking-wider sm:font-montserrat",
+  "md:label2": "md:text-xs md:font-medium md:uppercase md:tracking-wider md:font-montserrat",
+  "lg:label2": "lg:text-xs lg:font-medium lg:uppercase lg:tracking-wider lg:font-montserrat",
+  "xl:label2": "xl:text-xs xl:font-medium xl:uppercase xl:tracking-wider xl:font-montserrat",
+  "2xl:label2": "2xl:text-xs 2xl:font-medium 2xl:uppercase 2xl:tracking-wider 2xl:font-montserrat",
   
   // Code
   code1: "font-mono text-sm",
+  "sm:code1": "sm:font-mono sm:text-sm",
+  "md:code1": "md:font-mono md:text-sm",
+  "lg:code1": "lg:font-mono lg:text-sm",
+  "xl:code1": "xl:font-mono xl:text-sm",
+  "2xl:code1": "2xl:font-mono 2xl:text-sm",
   
   // Base font
   fontBase: "font-inter"

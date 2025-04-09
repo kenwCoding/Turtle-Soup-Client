@@ -6,6 +6,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from "react-router";
 
 import type { Route } from "./+types/root";
@@ -74,6 +75,18 @@ function Footer() {
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const excludeRoutes = [
+    {
+      path: "/login",
+      isShowNavBar: false,
+      isShowFooter: false,
+    }
+  ];
+  const { pathname } = useLocation();
+  
+  const isNavBarExcluded = excludeRoutes.some(route => route.path === pathname && route.isShowNavBar === false);
+  const isFooterExcluded = excludeRoutes.some(route => route.path === pathname && route.isShowFooter === false);
+
   return (
     <html lang="en" className="h-full scroll-smooth">
       <head>
@@ -100,11 +113,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="color-scheme" />
       </head>
       <body className={`${backgrounds.surface} flex flex-col min-h-screen`}>
-        <Navbar />
+        {!isNavBarExcluded ? <Navbar /> : null}
         <main className="flex-grow">
           {children}
         </main>
-        <Footer />
+        {!isFooterExcluded ? <Footer /> : null}
         <ScrollRestoration />
         <Scripts />
       </body>
