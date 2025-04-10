@@ -4,6 +4,7 @@ import { cn } from '~/lib/utils';
 import { Container, H1, H2, H3, H4, Body1, Body2, Button, Label1 } from '~/components/basic';
 import bookLogo from '~/assets/images/logo-app-book.png';
 import turtleLogo from '~/assets/images/logo-app-turtle.png';
+import LoadingScreen from '~/components/LoadingScreen';
 
 export default function HowToPlayPage() {
   return (
