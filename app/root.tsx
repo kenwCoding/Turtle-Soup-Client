@@ -13,6 +13,12 @@ import type { Route } from "./+types/root";
 import "./app.css";
 import { backgrounds, borders, textColors, typography } from './styling';
 import Navbar from "./components/Navbar/Navbar";
+import { UserProvider } from './context/UserContext';
+import { ThemeProvider } from './context/ThemeContext';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+
+// Create a client
+const queryClient = new QueryClient();
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -83,7 +89,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     }
   ];
   const { pathname } = useLocation();
-  
+
   const isNavBarExcluded = excludeRoutes.some(route => route.path === pathname && route.isShowNavBar === false);
   const isFooterExcluded = excludeRoutes.some(route => route.path === pathname && route.isShowFooter === false);
 
@@ -113,13 +119,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="color-scheme" />
       </head>
       <body className={`${backgrounds.surface} flex flex-col min-h-screen`}>
-        {!isNavBarExcluded ? <Navbar /> : null}
-        <main className="flex-grow">
-          {children}
-        </main>
-        {!isFooterExcluded ? <Footer /> : null}
-        <ScrollRestoration />
-        <Scripts />
+        <QueryClientProvider client={queryClient}>
+          <UserProvider>
+            <ThemeProvider>
+            {!isNavBarExcluded ? <Navbar /> : null}
+            <main className="flex-grow">
+              {children}
+            </main>
+            {!isFooterExcluded ? <Footer /> : null}
+            <ScrollRestoration />
+            <Scripts />
+            </ThemeProvider>
+          </UserProvider>
+        </QueryClientProvider>
       </body>
     </html>
   );

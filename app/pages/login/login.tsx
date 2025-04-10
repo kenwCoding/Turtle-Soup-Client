@@ -2,15 +2,23 @@ import React from 'react';
 import { backgrounds, shadows, textColors } from '~/styling';
 import { cn } from '~/lib/utils';
 import { Container, H1, H2, H3, H4, Body1, Body2, Button, Label1 } from '~/components/basic';
-import { Link } from 'react-router';
+import { Link, Navigate } from 'react-router';
 import turtleLogo from '~/assets/images/logo-app-turtle.png';
 import bookLogo from '~/assets/images/logo-app-book.png';
+import { useQuery } from '@tanstack/react-query';
+import { googleLogin } from '~/apis/auth';
+import { useUser } from '~/context/UserContext';
 
 export default function LoginPage() {
+  const { isLoggedIn, user, setUser } = useUser();
+
+  if (isLoggedIn) {
+    return <Navigate to="/" />;
+  }
+
   // This function will be implemented by you
   const handleGoogleLogin = () => {
-    console.log('Google login clicked');
-    // Your authentication logic will go here
+    googleLogin()
   };
 
   return (

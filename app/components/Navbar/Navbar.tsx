@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import { backgrounds, textColors, typography, shadows, borders } from '~/styling';
 import Button from '~/components/basic/Button';
+import { User, LogOut, LogIn } from 'lucide-react';
+import { useUser } from '~/context/UserContext';
+import { googleLogout } from '~/apis/auth';
 
 const routes = [
   {
@@ -33,6 +36,7 @@ const routes = [
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const { isLoggedIn, user, isLoading } = useUser();
   
   // Initialize dark mode based on user preference or localStorage
   useEffect(() => {
@@ -60,6 +64,11 @@ export default function Navbar() {
       localStorage.setItem('theme', 'dark');
       setIsDarkMode(true);
     }
+  };
+  
+  // Handle logout
+  const handleLogout = () => {
+    googleLogout();
   };
   
   // Icons for dark/light mode
@@ -95,21 +104,66 @@ export default function Navbar() {
             </div>
           </div>
           
-          {/* Dark mode toggle and mobile menu button */}
-          <div className="flex items-center">
+          {/* User controls: Dark mode toggle, user/login buttons */}
+          <div className={`flex items-center space-x-3 ${isLoading ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'} transition-opacity duration-200`}>
             {/* Dark mode toggle */}
-            <Button
-              variant="ghost"
-              size="sm"
-              icon={isDarkMode ? sunIcon : moonIcon}
-              onClick={toggleDarkMode}
-              aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-              className="mr-4 rounded-full"
-              showFocusRing={false}
-            >
-              {''}
-            </Button>
-            
+            <div className="relative md:flex md:justify-center md:items-center hidden">
+              <Button
+                variant="ghost"
+                size="sm"
+                icon={isDarkMode ? sunIcon : moonIcon}
+                onClick={toggleDarkMode}
+                aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                className="rounded-full w-10 h-9"
+                showFocusRing={false}
+              >
+                {''}
+              </Button>
+            {isLoading ? (
+              null
+            ) : isLoggedIn ? (
+              <>
+                {/* User profile button with dropdown for logout */}
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  icon={<img src={user?.image_url} alt="User profile" className="rounded-full w-6 h-6" />}
+                  aria-label="User profile"
+                  className="rounded-full mx-0"
+                  showFocusRing={false}
+                >
+                  {''}
+                </Button>
+                
+                {/* Logout button (as icon) */}
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  icon={<LogOut className='w-5 h-5' />}
+                  onClick={handleLogout}
+                  aria-label="Logout"
+                  className="rounded-full mx-0"
+                  showFocusRing={false}
+                >
+                  {''}
+                </Button>
+              </>
+            ) : (
+              /* Login button */
+              <Link to="/login">
+                <Button
+                  variant="primary"
+                  size="sm"
+                  icon={<LogIn size={20} />}
+                  iconPosition="left"
+                  aria-label="Login"
+                  className="rounded-md hidden md:block"
+                >
+                  Login
+                </Button>
+              </Link>
+            )}
+            </div>
             {/* Mobile menu button */}
             <div className="md:hidden">
               <button
@@ -154,21 +208,53 @@ export default function Navbar() {
           {routes.map((route) => (
             <MobileNavLink key={route.path} to={route.path}>{route.name}</MobileNavLink>
           ))}
-          {/* Dark mode toggle in mobile menu */}
-          <div className="pl-3 pr-4 py-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              icon={isDarkMode ? sunIcon : moonIcon}
-              iconPosition="left"
-              onClick={toggleDarkMode}
-              width="full"
-              className={`${typography.body1} justify-start rounded-full`}
-              showFocusRing={false}
+          
+          {isLoading ? (
+            null
+          ) : isLoggedIn ? (
+            <>
+              {/* User profile link in mobile menu */}
+              <Link
+                to=""
+                className={`block pl-3 pr-4 py-2 ${typography.body1} ${textColors.onSurface} hover:${backgrounds.surfaceAlt} hover:${textColors.primary} transition-colors duration-200 flex items-center`}
+              >
+                <img src={user?.image_url} alt="User profile" className="rounded-full w-5 h-5 mr-2" />
+                {user.email}
+              </Link>
+              
+              {/* Logout button in mobile menu */}
+              <button
+                onClick={handleLogout}
+                className={`block pl-3 pr-4 py-2 w-full text-left ${typography.body1} ${textColors.onSurface} hover:${backgrounds.surfaceAlt} hover:${textColors.primary} transition-colors duration-200 flex items-center`}
+              >
+                <LogOut size={18} className="mr-2" />
+                Logout
+              </button>
+            </>
+          ) : (
+            /* Login link in mobile menu */
+            <Link
+              to="/login"
+              className={`block pl-3 pr-4 py-2 ${typography.body1} ${textColors.onSurface} hover:${backgrounds.surfaceAlt} hover:${textColors.primary} transition-colors duration-200 flex items-center`}
             >
-              {isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-            </Button>
-          </div>
+              <LogIn size={18} className="mr-2" />
+              Login
+            </Link>
+          )}
+          
+          {/* Dark mode toggle in mobile menu */}
+          <Button
+            variant="ghost"
+            size="sm"
+            icon={isDarkMode ? sunIcon : moonIcon}
+            iconPosition="left"
+            onClick={toggleDarkMode}
+            width="full"
+            className={`${typography.body1} justify-start rounded-full`}
+            showFocusRing={false}
+          >
+            {isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+          </Button>
         </div>
       </div>
     </nav>
