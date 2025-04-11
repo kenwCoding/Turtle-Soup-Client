@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   isRouteErrorResponse,
   Links,
@@ -16,6 +16,7 @@ import Navbar from "./components/Navbar/Navbar";
 import { UserProvider } from './context/UserContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import LoadingScreen from './components/LoadingScreen';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -123,6 +124,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <UserProvider>
             <ThemeProvider>
             {!isNavBarExcluded ? <Navbar /> : null}
+            <InitLoadingScreen />
             <main className="flex-grow">
               {children}
             </main>
@@ -169,3 +171,14 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     </main>
   );
 }
+
+// disappear in 5 seconds
+const InitLoadingScreen = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 5000);
+  }, []);
+  return isLoading ? <LoadingScreen text="Mock Loading 5s..." /> : null;
+};
